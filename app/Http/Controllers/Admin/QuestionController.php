@@ -23,6 +23,8 @@ class QuestionController extends Controller
         ]);
 
         $question = Question::create($request->all());
+
+        return response()->json($questionnaire, 201);
     }
 
     public function show(Question $question)
