@@ -25,6 +25,11 @@ class QuestionnaireController extends Controller
         Questionnaire::create($request->all());
     }
 
+    public function show(Questionnaire $questionnaire)
+    {
+        return $questionnaire;
+    }
+
     // Met à jour un questionnaire
     public function update(Request $request, Questionnaire $questionnaire)
     {
