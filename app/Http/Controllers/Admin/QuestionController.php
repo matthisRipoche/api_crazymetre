@@ -13,4 +13,36 @@ class QuestionController extends Controller
         $questions = Question::where('questionnaire_id', $questionnaireId)->get();
         return response()->json($questions);
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'questionnaire_id' => 'required|exists:questionnaires,id',
+            'text' => 'required|string',
+            'type' => 'required|string',
+        ]);
+
+        $question = Question::create($request->all());
+    }
+
+    public function show(Question $question)
+    {
+        return $question;
+    }
+
+    public function update(Request $request, Question $question)
+    {
+        $request->validate([
+            'questionnaire_id' => 'required|exists:questionnaires,id',
+            'text' => 'required|string',
+            'type' => 'required|string',
+        ]);
+
+        $question->update($request->all());
+    }
+
+    public function destroy(Question $question)
+    {
+        $question->delete();
+    }
 }
