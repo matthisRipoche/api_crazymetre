@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Models\Questionnaire;
 
 class QuestionController extends Controller
 {
@@ -32,18 +33,24 @@ class QuestionController extends Controller
         return $question;
     }
 
-    public function update(Request $request, Question $question)
+    public function update(Request $request, Questionnaire $questionnaire, Question $question)
     {
         $request->validate([
-            'questionnaire_id' => 'required|exists:questionnaires,id',
-            'text' => 'required|string',
-            'type' => 'required|string',
+            'title' => 'required|string',
         ]);
 
-        $question->update($request->all());
+        // Vérifie que la question appartient bien au questionnaire
+        if ($question->questionnaire_id !== $questionnaire->id) {
+            return response()->json(['message' => 'Cette question n\'appartient pas à ce questionnaire'], 404);
+        }
+
+        $question->update($request->only(['title']));
+
+        return response()->json($question, 200);
     }
 
-    public function destroy(Question $question)
+
+    public function destroy(Questionnaire $questionnaire, Question $question)
     {
         $question->delete();
     }

@@ -12,11 +12,11 @@ Route::get('/questionnaires/{questionnaire}', [QuestionnaireController::class, '
 Route::put('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'update']);
 Route::delete('/questionnaires/{questionnaire}', [QuestionnaireController::class, 'destroy']);
 
-Route::get('/{questionnaireId}/questions', [QuestionController::class, 'index']);
-Route::post('/{questionnaireId}/questions', [QuestionController::class, 'store']);
-Route::get('/{questionnaireId}/questions/{question}', [QuestionController::class, 'show']);
-Route::put('/{questionnaireId}/questions/{question}', [QuestionController::class, 'update']);
-Route::delete('/{questionnaireId}/questions/{question}', [QuestionController::class, 'destroy']);
+Route::get('/{questionnaire}/questions', [QuestionController::class, 'index']);
+Route::post('/{questionnaire}/questions', [QuestionController::class, 'store']);
+Route::get('/{questionnaire}/questions/{question}', [QuestionController::class, 'show']);
+Route::put('/{questionnaire}/questions/{question}', [QuestionController::class, 'update']);
+Route::delete('/{questionnaire}/questions/{question}', [QuestionController::class, 'destroy']);
 
 Route::get('/questions/{question}/reponses', [ReponseController::class, 'index']);
 Route::post('/questions/{question}/reponse', [ReponseController::class, 'store']);
